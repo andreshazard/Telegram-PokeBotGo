@@ -27,6 +27,7 @@ bot_token.txt
 movesets.txt
 mvnw*
 *.swp
+mysqlScript.sql
 
 
 
