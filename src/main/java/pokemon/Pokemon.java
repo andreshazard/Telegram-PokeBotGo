@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 /**
- * Created by andreshazard on 10/7/16.
+ * class that holds the pokemon info given back to the user
  */
 @Entity
 @Table(name = "pokemon")
@@ -52,10 +52,6 @@ public class Pokemon {
         this.best_offensive_charge_move_id = best_offensive_charge_move_id;
         this.best_defensive_quick_move_id = best_defensive_quick_move_id;
         this.best_defensive_charge_move_id = best_defensive_charge_move_id;
-    }
-
-    public int getPokemon_id() {
-        return pokemon_id;
     }
 
     public int getPokemon_number() {
