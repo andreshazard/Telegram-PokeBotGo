@@ -93,7 +93,5 @@ class TelegramBotSpec extends Specification {
         thrown(NullPointerException)
 
     }
-
-
 }
 

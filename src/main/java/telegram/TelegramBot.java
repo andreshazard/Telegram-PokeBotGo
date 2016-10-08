@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by andreshazard on 10/6/16.
+ * class that handles the communication with Telegram bot
  */
 public class TelegramBot extends TelegramLongPollingBot {
 
