@@ -14,7 +14,10 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
+
+        //Pokemon pokemon = dao.getPokemonWithName("charmander");
         //check if the update has a message
+
         if(update.hasMessage()){
             Message message = update.getMessage();
 
