@@ -1,11 +1,10 @@
 package com.pokebotgo;
 
-import bot.BotConfig;
+import telegram.BotConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.telegram.telegrambots.TelegramBotsApi;
-import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import telegram.TelegramBot;
 

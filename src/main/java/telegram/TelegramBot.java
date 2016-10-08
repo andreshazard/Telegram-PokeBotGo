@@ -1,6 +1,5 @@
 package telegram;
 
-import bot.BotConfig;
 import com.pokebotgo.PokeBotGoApplication;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Message;
