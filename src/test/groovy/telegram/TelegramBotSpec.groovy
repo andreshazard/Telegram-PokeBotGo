@@ -48,7 +48,7 @@ class TelegramBotSpec extends Specification {
         telegramBot.onUpdateReceived(update)
 
         then: "a greeting will be sent back to the user"
-        1 * sendMessageRequest.setText("Hi trainer." + TelegramBot.newline + "Use one of the commands to get information")
+        1 * sendMessageRequest.setText('Hi trainer.\nUse command /pokemon follow by a pokemon\'s name to get information.\nEg: /pokemon pikachu')
 
         and: "expect error since we are not sending the message when testing"
         thrown(NullPointerException)
@@ -67,7 +67,7 @@ class TelegramBotSpec extends Specification {
         telegramBot.onUpdateReceived(update)
 
         then: "a message will ask the user to use a command"
-        1 * sendMessageRequest.setText("Please use of the commands");
+        1 * sendMessageRequest.setText('Please use command /pokemon follow by a pokemon\'s name\nEg: /pokemon pikachu')
 
         and: "expect error since we are not sending the message when testing"
         thrown(NullPointerException)
@@ -80,7 +80,7 @@ class TelegramBotSpec extends Specification {
         update.hasMessage() >> true
         update.getMessage() >> message
         message.hasText() >> true
-        message.getText() >> "/pikachu"
+        message.getText() >> "/pokemon pikachu"
 
         when: "onUpdateReceived is called"
         telegramBot.onUpdateReceived(update)

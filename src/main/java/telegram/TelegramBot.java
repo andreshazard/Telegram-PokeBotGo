@@ -37,14 +37,16 @@ public class TelegramBot extends TelegramLongPollingBot {
                 sendMessageRequest.setChatId(message.getChatId().toString()); //who should get from the message the sender that sent it.
                 String command = message.getText();
                 if (command.equals("/start")) {
-                    sendMessageRequest.setText("Hi trainer." + newline + "Use one of the commands to get information");
+                    sendMessageRequest.setText("Hi trainer." + newline + "Use command /pokemon follow by a pokemon's name " +
+                            "to get information." + newline + "Eg: /pokemon pikachu");
                 }
-                else if (!pokemonList.PokemonListCheck(command.substring(1))) {
-                    sendMessageRequest.setText("Please use of the commands");
+                else if (command.length() < 9 || !pokemonList.PokemonListCheck(command.substring(9))) {
+                    sendMessageRequest.setText("Please use command /pokemon follow by a pokemon's name" + newline +
+                            "Eg: /pokemon pikachu");
                 }
 
                 else {
-                    Pokemon pokemon = dao.getPokemonWithName(command.substring(1));
+                    Pokemon pokemon = dao.getPokemonWithName(command.substring(9));
                     String response = "Number: " + pokemon.getPokemon_number() + newline +
                             "Pokemon: " + pokemon.getPokemon_name() + newline +
                             "Type: " + pokemon.getType() + newline +
