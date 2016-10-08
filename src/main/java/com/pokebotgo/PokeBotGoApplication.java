@@ -21,8 +21,10 @@ public class PokeBotGoApplication {
 	public static void main(String[] args) throws SQLException {
 
 		ConfigurableApplicationContext context = SpringApplication.run(PokeBotGoApplication.class, args);
+
 		dao = (Dao) context.getBean("dao");
 		TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
+
 		try {
 			telegramBotsApi.registerBot(new TelegramBot());
 		} catch (TelegramApiException e) {

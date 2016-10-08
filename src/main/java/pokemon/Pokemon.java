@@ -22,31 +22,31 @@ public class Pokemon {
     private String pokemon_name;
 
     @NotNull
-    private int type_id;
+    private String type;
 
     @Null
     private int buddy_distance;
 
     @NotNull
-    private int best_offensive_quick_move_id;
+    private String best_offensive_quick_move_id;
 
     @NotNull
-    private int best_offensive_charge_move_id;
+    private String best_offensive_charge_move_id;
 
     @NotNull
-    private int best_defensive_quick_move_id;
+    private String best_defensive_quick_move_id;
 
     @NotNull
-    private int best_defensive_charge_move_id;
+    private String best_defensive_charge_move_id;
 
 
     //Temporary constructor, this should have a builder pattern
-    public Pokemon(int pokemon_number, String pokemon_name, int type_id, int buddy_distance, int best_offensive_quick_move_id,
-                   int best_offensive_charge_move_id, int best_defensive_quick_move_id, int best_defensive_charge_move_id)
-    {
+    public Pokemon(int pokemon_number, String pokemon_name, String type, int buddy_distance,
+                   String best_offensive_quick_move_id, String best_offensive_charge_move_id,
+                   String best_defensive_quick_move_id, String best_defensive_charge_move_id) {
         this.pokemon_number = pokemon_number;
         this.pokemon_name = pokemon_name;
-        this.type_id = type_id;
+        this.type = type;
         this.buddy_distance = buddy_distance;
         this.best_offensive_quick_move_id = best_offensive_quick_move_id;
         this.best_offensive_charge_move_id = best_offensive_charge_move_id;
@@ -54,5 +54,39 @@ public class Pokemon {
         this.best_defensive_charge_move_id = best_defensive_charge_move_id;
     }
 
+    public int getPokemon_id() {
+        return pokemon_id;
+    }
 
+    public int getPokemon_number() {
+        return pokemon_number;
+    }
+
+    public String getPokemon_name() {
+        return pokemon_name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getBuddy_distance() {
+        return buddy_distance;
+    }
+
+    public String getBest_offensive_quick_move_id() {
+        return best_offensive_quick_move_id;
+    }
+
+    public String getBest_offensive_charge_move_id() {
+        return best_offensive_charge_move_id;
+    }
+
+    public String getBest_defensive_quick_move_id() {
+        return best_defensive_quick_move_id;
+    }
+
+    public String getBest_defensive_charge_move_id() {
+        return best_defensive_charge_move_id;
+    }
 }
