@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class PokemonList {
 
-    public final static List<String> POKEMON_LIST = Arrays.asList(
+    private final static List<String> POKEMON_LIST = Arrays.asList(
 		"bulbasaur",
 		"ivysaur",
 		"venusaur",
@@ -163,8 +163,9 @@ public class PokemonList {
         "mew"
             );
 
-    // This class should not be initialize
-    private PokemonList() {
+    public boolean PokemonListCheck(String name) {
+        return POKEMON_LIST.contains(name);
     }
+
 }
 

@@ -17,25 +17,27 @@ import java.util.logging.Logger;
  */
 public class TelegramBot extends TelegramLongPollingBot {
 
-    public final static Logger LOGGER = Logger.getLogger(BotConfig.class.getName());
-    public static String newline = System.getProperty("line.separator");
+    private final static Logger LOGGER = Logger.getLogger(BotConfig.class.getName());
+    private final static String newline = System.getProperty("line.separator");
+    private final SendMessage sendMessageRequest = new SendMessage();
+    private final PokemonList pokemonList = new PokemonList();
+    private Message message;
 
     @Override
     public void onUpdateReceived(Update update) {
 
         if(update.hasMessage()){
-            Message message = update.getMessage();
+            message = update.getMessage();
 
             //check if the message has text. it could also contain for example a location ( message.hasLocation() )
             if(message.hasText()){
                 //create an object that contains the information to send back the message
-                SendMessage sendMessageRequest = new SendMessage();
                 sendMessageRequest.setChatId(message.getChatId().toString()); //who should get from the message the sender that sent it.
                 String command = message.getText();
                 if (command.equals("/start")) {
                     sendMessageRequest.setText("Hi trainer." + newline + "Use one of the commands to get information");
                 }
-                else if (!PokemonList.POKEMON_LIST.contains(command.substring(1))) {
+                else if (!pokemonList.PokemonListCheck(command.substring(1))) {
                     sendMessageRequest.setText("Please use of the commands");
                 }
 
