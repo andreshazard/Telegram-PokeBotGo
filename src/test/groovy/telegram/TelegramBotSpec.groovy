@@ -1,5 +1,6 @@
 import com.blogspot.toomuchcoding.spock.subjcollabs.Collaborator
 import com.blogspot.toomuchcoding.spock.subjcollabs.Subject
+import com.pokebotgo.Dao
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
 import org.telegram.telegrambots.api.objects.Update
@@ -19,6 +20,9 @@ class TelegramBotSpec extends Specification {
 
     @Collaborator
     SendMessage sendMessageRequest = Mock();
+
+    @Collaborator
+    Dao dao = Stub();
 
     def "when update has no message nothing should be return to the user"() {
 
@@ -82,7 +86,8 @@ class TelegramBotSpec extends Specification {
         telegramBot.onUpdateReceived(update)
 
         then: "information about the pokemon is sent"
-        0 * sendMessageRequest.setText("Number " + _ as String);
+        1 * sendMessageRequest.setText('Number: 0\nPokemon: \nType: \nBuddy Distance: 0km\nBest Offence move set: ' +
+                '/\nBest Defensive move set: /')
 
         and: "expect error since we are not sending the message when testing"
         thrown(NullPointerException)

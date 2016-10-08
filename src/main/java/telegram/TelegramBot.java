@@ -1,5 +1,6 @@
 package telegram;
 
+import com.pokebotgo.Dao;
 import com.pokebotgo.PokeBotGoApplication;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Message;
@@ -22,6 +23,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     private final SendMessage sendMessageRequest = new SendMessage();
     private final PokemonList pokemonList = new PokemonList();
     private Message message;
+    private Dao dao = PokeBotGoApplication.dao;
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -42,7 +44,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                 }
 
                 else {
-                    Pokemon pokemon = PokeBotGoApplication.dao.getPokemonWithName(command.substring(1));
+                    Pokemon pokemon = dao.getPokemonWithName(command.substring(1));
                     String response = "Number: " + pokemon.getPokemon_number() + newline +
                             "Pokemon: " + pokemon.getPokemon_name() + newline +
                             "Type: " + pokemon.getType() + newline +
