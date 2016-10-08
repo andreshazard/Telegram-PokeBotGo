@@ -29,7 +29,6 @@ public class BotConfig {
         catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Make sure file PokeBotGo is present on root path");
             e.printStackTrace();
-            System.exit(1);
         }
 
         return "error"; //this should not be reach
