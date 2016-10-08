@@ -8,12 +8,17 @@ import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import pokemon.Pokemon;
+import pokemon.PokemonList;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by andreshazard on 10/6/16.
  */
 public class TelegramBot extends TelegramLongPollingBot {
 
+    public final static Logger LOGGER = Logger.getLogger(BotConfig.class.getName());
     public static String newline = System.getProperty("line.separator");
 
     @Override
@@ -27,34 +32,40 @@ public class TelegramBot extends TelegramLongPollingBot {
                 //create an object that contains the information to send back the message
                 SendMessage sendMessageRequest = new SendMessage();
                 sendMessageRequest.setChatId(message.getChatId().toString()); //who should get from the message the sender that sent it.
-                switch (message.getText()) {
-
-                    case "/charmander":
-                        Pokemon pokemon = PokeBotGoApplication.dao.getPokemonWithName("charmander");
-                        String response = "Number: " + pokemon.getPokemon_number() + newline +
-                                          "Pokemon: " + pokemon.getPokemon_name() + newline +
-                                          "Type: " + pokemon.getType() + newline +
-                                          "Buddy Distance: " + pokemon.getBuddy_distance() + "km" + newline +
-                                          "Best Offence move set: " + pokemon.getBest_offensive_quick_move_id() + "/" +
-                                                  pokemon.getBest_offensive_charge_move_id() + newline +
-                                          "Best Defensive move set: " + pokemon.getBest_defensive_quick_move_id() + "/" +
-                                                  pokemon.getBest_defensive_charge_move_id();
-
-                        sendMessageRequest.setText(response);
-
-                        break;
-                    default:
-                        sendMessageRequest.setText("Ese comando no lo conozco pasmado");
+                String command = message.getText();
+                if (command.equals("/start")) {
+                    sendMessageRequest.setText("Hi trainer." + newline + "Use one of the commands to get information");
                 }
+                else if (!PokemonList.POKEMON_LIST.contains(command.substring(1))) {
+                    sendMessageRequest.setText("Please use of the commands");
+                }
+
+                else {
+                    Pokemon pokemon = PokeBotGoApplication.dao.getPokemonWithName(command.substring(1));
+                    String response = "Number: " + pokemon.getPokemon_number() + newline +
+                            "Pokemon: " + pokemon.getPokemon_name() + newline +
+                            "Type: " + pokemon.getType() + newline +
+                            "Buddy Distance: " + pokemon.getBuddy_distance() + "km" + newline +
+                            "Best Offence move set: " + pokemon.getBest_offensive_quick_move_id() + "/" +
+                            pokemon.getBest_offensive_charge_move_id() + newline +
+                            "Best Defensive move set: " + pokemon.getBest_defensive_quick_move_id() + "/" +
+                            pokemon.getBest_defensive_charge_move_id();
+
+                    sendMessageRequest.setText(response);
+                }
+
                 try {
                     sendMessage(sendMessageRequest); //at the end, so some magic and send the message ;)
                 } catch (TelegramApiException e) {
-                    //do some error handling
+                    TelegramBot.LOGGER.log(Level.SEVERE, "There was an error sending the message");
+                    e.printStackTrace();
+
                 }
             }
         }
 
     }
+
 
     @Override
     public String getBotUsername() {

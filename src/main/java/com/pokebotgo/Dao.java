@@ -1,17 +1,23 @@
 package com.pokebotgo;
 
+import bot.BotConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import pokemon.Pokemon;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- * Created by andreshazard on 10/7/16.
+ * Class that handles the calls to the data base
  */
 
 
 @Component
 public class Dao {
+
+    public final static Logger LOGGER = Logger.getLogger(BotConfig.class.getName());
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -34,18 +40,23 @@ public class Dao {
         "WHERE p.pokemon_name=" + '"' + name + '"';
 
 
-        return  this.jdbcTemplate.queryForObject(query, ((resultSet, i) -> {
-            System.out.println(resultSet);
-            return new Pokemon(
-                    resultSet.getInt(1),
-                    resultSet.getString(2),
-                    resultSet.getString(3),
-                    resultSet.getInt(4),
-                    resultSet.getString(5),
-                    resultSet.getString(6),
-                    resultSet.getString(7),
-                    resultSet.getString(8));
-        }));
+        try {
+            return this.jdbcTemplate.queryForObject(query, ((resultSet, i) -> {
+                return new Pokemon(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getInt(4),
+                        resultSet.getString(5),
+                        resultSet.getString(6),
+                        resultSet.getString(7),
+                        resultSet.getString(8));
+            }));
+        } catch (NullPointerException e) {
+            Dao.LOGGER.log(Level.SEVERE, "There was an issue getting the info from database");
+            e.printStackTrace();
+            return null;
+        }
 
     }
 
