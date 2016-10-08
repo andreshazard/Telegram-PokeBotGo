@@ -26,7 +26,7 @@ nbdist/
 bot_token.txt
 movesets.txt
 mvnw*
-.swp
+*.swp
 
 
 
