@@ -36,7 +36,6 @@ public class TelegramBot extends TelegramLongPollingBot {
                 //create an object that contains the information to send back the message
                 sendMessageRequest.setChatId(message.getChatId().toString()); //who should get from the message the sender that sent it.
                 String command = message.getText();
-                command = command.toLowerCase();
                 if (command.equals("/start")) {
                     sendMessageRequest.setText("Hi trainer." + newline + "Use command /pokemon follow by a pokemon's name " +
                             "to get information." + newline + "Eg: /pokemon pikachu");
