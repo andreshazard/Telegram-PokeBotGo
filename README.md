@@ -17,4 +17,4 @@ https://telegram.me/teamrocketgobot
 
 ### Requesting matchup information base on type
 
-![Example](http://i.imgur.com/UPTwXRR.png "Example"
+![TYPE](http://i.imgur.com/UPTwXRR.png "Example")
