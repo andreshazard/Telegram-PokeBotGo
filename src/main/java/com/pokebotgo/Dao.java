@@ -1,11 +1,15 @@
 package com.pokebotgo;
 
-import telegram.BotConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 import pokemon.Pokemon;
+import telegram.BotConfig;
+import type.Type;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -57,6 +61,37 @@ public class Dao {
             e.printStackTrace();
             return null;
         }
+
+    }
+
+    public Type getTypeWithName(String name) {
+        List<String> strongAgainst = new ArrayList<>();
+        List<String> weekAgainst = new ArrayList<>();
+        String query = "select t.type_name, ts.type_name, tr.relation " +
+                "from type_relation as tr " +
+                "LEFT JOIN type as t on t.type_id=tr.type_id " +
+                "LEFT JOIN type as ts on ts.type_id=tr.type_id_secondary " +
+                "  where t.type_name =" + '"' + name + '"';
+        try {
+            SqlRowSet sqlRowSet = this.jdbcTemplate.queryForRowSet(query);
+            while (sqlRowSet.next()) {
+                if (sqlRowSet.getInt(3) == 2) {
+                    strongAgainst.add(sqlRowSet.getString(2));
+
+                } else {
+                    weekAgainst.add(sqlRowSet.getString(2));
+                }
+            }
+
+            Type type = new Type(name, strongAgainst, weekAgainst);
+            return type;
+
+        } catch (NullPointerException e) {
+            Dao.LOGGER.log(Level.SEVERE, "There was an issue getting the info from database");
+            e.printStackTrace();
+            return null;
+        }
+
 
     }
 

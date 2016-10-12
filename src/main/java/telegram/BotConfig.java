@@ -14,7 +14,7 @@ import java.util.stream.Stream;
  */
 public class BotConfig {
     public static final String BOT_USERNAME = "PokeBotGo";
-    public static final String BOT_TOKEN = getBotTokenFromFile();
+    public static final String BOT_TOKEN = "290660998:AAHqps5T4gmU4cMJPSoSreRJoQDO0j4wBJs";
     public final static Logger LOGGER = Logger.getLogger(BotConfig.class.getName());
 
 

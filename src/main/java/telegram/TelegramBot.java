@@ -9,6 +9,8 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import pokemon.Pokemon;
 import pokemon.PokemonList;
+import type.Type;
+import type.TypeList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +24,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     private final static String newline = System.getProperty("line.separator");
     private final SendMessage sendMessageRequest = new SendMessage();
     private final PokemonList pokemonList = new PokemonList();
+    private final TypeList typeList = new TypeList();
     private Message message;
     private Dao dao = PokeBotGoApplication.dao;
 
@@ -38,26 +41,23 @@ public class TelegramBot extends TelegramLongPollingBot {
                 String command = message.getText();
                 command = command.toLowerCase();
                 if (command.equals("/start")) {
-                    sendMessageRequest.setText("Hi trainer." + newline + "Use command /pokemon follow by a pokemon's name " +
-                            "to get information." + newline + "Eg: /pokemon pikachu");
+                    sendMessageRequest.setText("Hi trainer." + newline + "Use one of the commands follow by a parameter" +
+                            " to get information." + newline + "Eg: /pokemon pikachu" + newline + "Eg: /type fire");
                 }
-                else if (command.length() < 9 || !pokemonList.PokemonListCheck(command.substring(9))) {
-                    sendMessageRequest.setText("Please use command /pokemon follow by a pokemon's name" + newline +
-                            "Eg: /pokemon pikachu");
+                else if(command.length() >= 5 && command.substring(0, 5).equals("/type") &&
+                        typeList.TypeListCheck(command.substring(6))) {
+                    setTypeRespond(command);
+                }
+
+                else if(command.length() >= 8 && command.substring(0, 8).equals("/pokemon") &&
+                        pokemonList.PokemonListCheck(command.substring(9))) {
+                    setPokemonRespond(command);
                 }
 
                 else {
-                    Pokemon pokemon = dao.getPokemonWithName(command.substring(9));
-                    String response = "Number: " + pokemon.getPokemon_number() + newline +
-                            "Pokemon: " + pokemon.getPokemon_name() + newline +
-                            "Type: " + pokemon.getType() + newline +
-                            "Buddy Distance: " + pokemon.getBuddy_distance() + "km" + newline +
-                            "Best Offence move set: " + pokemon.getBest_offensive_quick_move_id() + "/" +
-                            pokemon.getBest_offensive_charge_move_id() + newline +
-                            "Best Defensive move set: " + pokemon.getBest_defensive_quick_move_id() + "/" +
-                            pokemon.getBest_defensive_charge_move_id();
-
-                    sendMessageRequest.setText(response);
+                    sendMessageRequest.setText("Please use one of the command follow by a valid parameter" + newline +
+                            "Eg: /pokemon pikachu" + newline +
+                            "Eg: /type fire");
                 }
 
                 try {
@@ -71,6 +71,42 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
 
     }
+
+    private void setTypeRespond(String command) {
+        Type type = dao.getTypeWithName(command.substring(6));
+        String response = "Type: " + type.getName().toUpperCase() + newline +
+                "  Strong Against: " + newline;
+        for (String strongAgainstType: type.getStrongAgainst()) {
+            response += "    - " + strongAgainstType + newline;
+        }
+
+        response += "  Week Against: " + newline;
+
+        for (String weekAgainstType: type.getWeekAgainst()) {
+            response += "    - " + weekAgainstType + newline;
+        }
+
+        sendMessageRequest.setText(response);
+
+
+    }
+
+    private void setPokemonRespond(String command) {
+        Pokemon pokemon = dao.getPokemonWithName(command.substring(9));
+        String response = "Number: " + pokemon.getPokemon_number() + newline +
+                "Pokemon: " + pokemon.getPokemon_name() + newline +
+                "Type: " + pokemon.getType() + newline +
+                "Buddy Distance: " + pokemon.getBuddy_distance() + "km" + newline +
+                "Best Offence move set: " + pokemon.getBest_offensive_quick_move_id() + "/" +
+                pokemon.getBest_offensive_charge_move_id() + newline +
+                "Best Defensive move set: " + pokemon.getBest_defensive_quick_move_id() + "/" +
+                pokemon.getBest_defensive_charge_move_id();
+
+        sendMessageRequest.setText(response);
+
+    }
+
+
 
 
     @Override
