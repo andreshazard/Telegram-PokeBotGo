@@ -24,10 +24,13 @@ nbdist/
 .nb-gradle/
 
 bot_token.txt
+test_bot_token.txt
 movesets.txt
 mvnw*
 *.swp
 mysqlScript.sql
+.gitignore
+
 
 
 
