@@ -2,7 +2,7 @@ Telegram bot that you provides you information about Pokemo Go, to improve your 
  @TeamRocketGoBot
 https://telegram.me/teamrocketgobot
 
-## Start Page
+### Start Page
 
 ![Start](http://i.imgur.com/adOTurL.png "Start Page")
 
@@ -10,7 +10,11 @@ https://telegram.me/teamrocketgobot
 
 
 
-## Requesting infomation about a pokemon
+### Requesting infomation about a pokemon
 
 
 ![Example](http://i.imgur.com/ipJ27tf.png "Example")
+
+### Requesting matchup information base on type
+
+![Example](http://i.imgur.com/UPTwXRR.png "Example"
