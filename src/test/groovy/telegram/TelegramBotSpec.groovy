@@ -68,7 +68,7 @@ class TelegramBotSpec extends Specification {
         telegramBot.onUpdateReceived(update)
 
         then: "a message will ask the user to use a command"
-        1 * sendMessageRequest.setText('Please use one of the command follow by a valid parameter\nEg: /pokemon pikachu' +
+        1 * sendMessageRequest.setText('Please use one of the commands, followed by a valid parameter\nEg: /pokemon pikachu' +
                 '\nEg: /type fire')
 
         and: "expect error since we are not sending the message when testing"
@@ -88,7 +88,7 @@ class TelegramBotSpec extends Specification {
         telegramBot.onUpdateReceived(update)
 
         then: "a message will ask the user to use a command"
-        1 * sendMessageRequest.setText('Please use one of the command follow by a valid parameter\nEg: /pokemon pikachu' +
+        1 * sendMessageRequest.setText('Please use one of the commands, followed by a valid parameter\nEg: /pokemon pikachu' +
                 '\nEg: /type fire')
 
         and: "expect error since we are not sending the message when testing"
@@ -109,7 +109,7 @@ class TelegramBotSpec extends Specification {
         telegramBot.onUpdateReceived(update)
 
         then: "a message will ask the user to use a command"
-        1 * sendMessageRequest.setText('Please use one of the command follow by a valid parameter\nEg: /pokemon pikachu' +
+        1 * sendMessageRequest.setText('Please use one of the commands, followed by a valid parameter\nEg: /pokemon pikachu' +
                 '\nEg: /type fire')
 
         and: "expect error since we are not sending the message when testing"
@@ -150,7 +150,7 @@ class TelegramBotSpec extends Specification {
         telegramBot.onUpdateReceived(update)
 
         then: "information about the pokemon is sent"
-        1 * sendMessageRequest.setText('Type: \n  Strong Against: \n  Week Against: \n')
+        1 * sendMessageRequest.setText('Type: \n  Strong Against: \n  Weak Against: \n')
 
         and: "expect error since we are not sending the message when testing"
         thrown(NullPointerException)
