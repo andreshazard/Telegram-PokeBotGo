@@ -56,7 +56,7 @@ class TelegramBotSpec extends Specification {
 
     }
 
-    def "when update has a message that is not a command"(){
+    def "when update has a message that is not a command a default message should be sent"(){
 
         given: "an update request with a message that is not a command"
         update.hasMessage() >> true
@@ -76,7 +76,49 @@ class TelegramBotSpec extends Specification {
 
     }
 
-    def "when update has a valid pokemon command"(){
+    def "when update has a valid command /pokemon but no parameter a default message should be sent"() {
+
+        given: "an update request with a valid command but no parameter"
+        update.hasMessage() >> true
+        update.getMessage() >> message
+        message.hasText() >> true
+        message.getText() >> "/pokemon"
+
+        when: "onUpdateReceived is called"
+        telegramBot.onUpdateReceived(update)
+
+        then: "a message will ask the user to use a command"
+        1 * sendMessageRequest.setText('Please use one of the command follow by a valid parameter\nEg: /pokemon pikachu' +
+                '\nEg: /type fire')
+
+        and: "expect error since we are not sending the message when testing"
+        thrown(NullPointerException)
+
+
+    }
+
+    def "when update has a valid command /type but no parameter a default message should be sent"() {
+
+        given: "an update request with a valid command but no parameter"
+        update.hasMessage() >> true
+        update.getMessage() >> message
+        message.hasText() >> true
+        message.getText() >> "/type"
+
+        when: "onUpdateReceived is called"
+        telegramBot.onUpdateReceived(update)
+
+        then: "a message will ask the user to use a command"
+        1 * sendMessageRequest.setText('Please use one of the command follow by a valid parameter\nEg: /pokemon pikachu' +
+                '\nEg: /type fire')
+
+        and: "expect error since we are not sending the message when testing"
+        thrown(NullPointerException)
+
+
+    }
+
+    def "when update has a valid pokemon command information about pokemon should be sent"(){
 
         given: "an update request with a valid message"
         update.hasMessage() >> true
@@ -96,7 +138,7 @@ class TelegramBotSpec extends Specification {
 
     }
 
-    def "when update has a valid type command"(){
+    def "when update has a valid type command type matchups should be sent"(){
 
         given: "an update request with a valid message"
         update.hasMessage() >> true

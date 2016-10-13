@@ -41,8 +41,10 @@ public class TelegramBot extends TelegramLongPollingBot {
                 String command = message.getText();
                 command = command.toLowerCase();
                 if (command.equals("/start")) {
-                    sendMessageRequest.setText("Hi trainer." + newline + "Use one of the commands follow by a parameter" +
-                            " to get information." + newline + "Eg: /pokemon pikachu" + newline + "Eg: /type fire");
+                    setStartRespond();
+                }
+                else if (command.equals("/pokemon") || command.equals("/type")) {
+                    setDefaultRespond(); //user did not send the parameter
                 }
                 else if(command.length() >= 5 && command.substring(0, 5).equals("/type") &&
                         typeList.TypeListCheck(command.substring(6))) {
@@ -55,9 +57,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                 }
 
                 else {
-                    sendMessageRequest.setText("Please use one of the command follow by a valid parameter" + newline +
-                            "Eg: /pokemon pikachu" + newline +
-                            "Eg: /type fire");
+                    setDefaultRespond();
                 }
 
                 try {
@@ -70,6 +70,18 @@ public class TelegramBot extends TelegramLongPollingBot {
             }
         }
 
+    }
+
+    private void setDefaultRespond() {
+        sendMessageRequest.setText("Please use one of the command follow by a valid parameter" + newline +
+                "Eg: /pokemon pikachu" + newline +
+                "Eg: /type fire");
+
+    }
+
+    private void setStartRespond() {
+        sendMessageRequest.setText("Hi trainer." + newline + "Use one of the commands follow by a parameter" +
+                " to get information." + newline + "Eg: /pokemon pikachu" + newline + "Eg: /type fire");
     }
 
     private void setTypeRespond(String command) {
