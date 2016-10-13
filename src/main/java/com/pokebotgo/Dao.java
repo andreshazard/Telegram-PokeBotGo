@@ -67,11 +67,11 @@ public class Dao {
     public Type getTypeWithName(String name) {
         List<String> strongAgainst = new ArrayList<>();
         List<String> weekAgainst = new ArrayList<>();
-        String query = "select t.type_name, ts.type_name, tr.relation " +
-                "from type_relation as tr " +
-                "LEFT JOIN type as t on t.type_id=tr.type_id " +
-                "LEFT JOIN type as ts on ts.type_id=tr.type_id_secondary " +
-                "  where t.type_name =" + '"' + name + '"';
+        String query = "SELECT t.type_name, ts.type_name, tr.relation " +
+                "FROM type_relation AS tr " +
+                "LEFT JOIN TYPE AS t ON t.type_id=tr.type_id " +
+                "LEFT JOIN type AS ts ON ts.type_id=tr.type_id_secondary " +
+                "  WHERE t.type_name =" + '"' + name + '"';
         try {
             SqlRowSet sqlRowSet = this.jdbcTemplate.queryForRowSet(query);
             while (sqlRowSet.next()) {
