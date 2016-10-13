@@ -73,7 +73,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     private void setDefaultRespond() {
-        sendMessageRequest.setText("Please use one of the command follow by a valid parameter" + newline +
+        sendMessageRequest.setText("Please use one of the commands, followed by a valid parameter" + newline +
                 "Eg: /pokemon pikachu" + newline +
                 "Eg: /type fire");
 
@@ -92,7 +92,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             response += "    - " + strongAgainstType + newline;
         }
 
-        response += "  Week Against: " + newline;
+        response += "  Weak Against: " + newline;
 
         for (String weekAgainstType: type.getWeekAgainst()) {
             response += "    - " + weekAgainstType + newline;
