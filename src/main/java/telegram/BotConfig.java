@@ -34,4 +34,20 @@ public class BotConfig {
         return "error"; //this should not be reach
     }
 
+    private static final  String getTestBotTokenFromFile() {
+        String fileName = "test_bot_token.txt";
+        String toke;
+        try (Stream<String> stream = Files.lines(Paths.get(fileName))){
+            List<String> list;
+            list = stream.collect(Collectors.toList());
+            return list.get(0);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "error"; //this should not be reach
+
+    }
+
 }
