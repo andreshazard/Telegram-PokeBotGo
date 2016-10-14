@@ -42,8 +42,33 @@ public class Dao {
         "LEFT JOIN quick_move AS qd ON qd.quick_move_id=p.best_defensive_quick_move_id " +
         "LEFT JOIN charge_move AS cd ON cd.charge_move_id=p.best_defensive_charge_move_id " +
         "WHERE p.pokemon_name=" + '"' + name + '"';
+        return createPokemonObject(query);
+
+    }
+
+    public Pokemon getPokemonWithNumber(int number) {
+        String query = "SELECT p.pokemon_number, " +
+                "p.pokemon_name, " +
+                "t.type_name, " +
+                "p.buddy_distance, " +
+                "qa.quick_move_name, " +
+                "ca.charge_move_name, " +
+                "qd.quick_move_name, " +
+                "cd.charge_move_name " +
+                "FROM pokemon AS p " +
+                "INNER JOIN type AS t ON p.type_id=t.type_id " +
+                "LEFT JOIN quick_move AS qa ON qa.quick_move_id=p.best_offensive_quick_move_id " +
+                "LEFT JOIN charge_move AS ca ON ca.charge_move_id=p.best_offensive_charge_move_id " +
+                "LEFT JOIN quick_move AS qd ON qd.quick_move_id=p.best_defensive_quick_move_id " +
+                "LEFT JOIN charge_move AS cd ON cd.charge_move_id=p.best_defensive_charge_move_id " +
+                "WHERE p.pokemon_number=" + '"' + number + '"';
 
 
+        return createPokemonObject(query);
+
+    }
+
+    private Pokemon createPokemonObject(String query) {
         try {
             return this.jdbcTemplate.queryForObject(query, ((resultSet, i) -> {
                 return new Pokemon(
@@ -61,7 +86,6 @@ public class Dao {
             e.printStackTrace();
             return null;
         }
-
     }
 
     public Type getTypeWithName(String name) {
@@ -78,7 +102,8 @@ public class Dao {
                 if (sqlRowSet.getInt(3) == 2) {
                     strongAgainst.add(sqlRowSet.getString(2));
 
-                } else {
+                }
+                else {
                     weekAgainst.add(sqlRowSet.getString(2));
                 }
             }
@@ -91,7 +116,6 @@ public class Dao {
             e.printStackTrace();
             return null;
         }
-
 
     }
 

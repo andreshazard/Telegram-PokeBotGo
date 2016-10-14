@@ -163,8 +163,14 @@ public class PokemonList {
         "mew"
             );
 
-    public boolean PokemonListCheck(String name) {
+    public boolean pokemonListCheck(String name) {
         return POKEMON_LIST.contains(name);
+    }
+
+	public boolean pokemonNumberCheck(int number) {
+        final int lowLimit = 0;
+        final int maxLimit = 152;
+        return (number > lowLimit && number < maxLimit);
     }
 
 }

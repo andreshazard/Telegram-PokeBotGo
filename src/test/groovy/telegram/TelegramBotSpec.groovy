@@ -49,7 +49,7 @@ class TelegramBotSpec extends Specification {
 
         then: "a greeting will be sent back to the user"
         1 * sendMessageRequest.setText('Hi trainer.\nUse one of the commands follow by a parameter to get information.' +
-                '\nEg: /pokemon pikachu\nEg: /type fire')
+                '\nEg: /pokemon pikachu\nEg: /type fire\nEg: /pokedex 1')
 
         and: "expect error since we are not sending the message when testing"
         thrown(NullPointerException)
@@ -69,7 +69,7 @@ class TelegramBotSpec extends Specification {
 
         then: "a message will ask the user to use a command"
         1 * sendMessageRequest.setText('Please use one of the commands, followed by a valid parameter\nEg: /pokemon pikachu' +
-                '\nEg: /type fire')
+                '\nEg: /type fire\nEg: /pokedex 1')
 
         and: "expect error since we are not sending the message when testing"
         thrown(NullPointerException)
@@ -89,7 +89,7 @@ class TelegramBotSpec extends Specification {
 
         then: "a message will ask the user to use a command"
         1 * sendMessageRequest.setText('Please use one of the commands, followed by a valid parameter\nEg: /pokemon pikachu' +
-                '\nEg: /type fire')
+                '\nEg: /type fire\nEg: /pokedex 1')
 
         and: "expect error since we are not sending the message when testing"
         thrown(NullPointerException)
@@ -110,7 +110,28 @@ class TelegramBotSpec extends Specification {
 
         then: "a message will ask the user to use a command"
         1 * sendMessageRequest.setText('Please use one of the commands, followed by a valid parameter\nEg: /pokemon pikachu' +
-                '\nEg: /type fire')
+                '\nEg: /type fire\nEg: /pokedex 1')
+
+        and: "expect error since we are not sending the message when testing"
+        thrown(NullPointerException)
+
+
+    }
+
+    def "when update has a valid command /pokedex but no parameter a default message should be sent"() {
+
+        given: "an update request with a valid command but no parameter"
+        update.hasMessage() >> true
+        update.getMessage() >> message
+        message.hasText() >> true
+        message.getText() >> "/pokedex"
+
+        when: "onUpdateReceived is called"
+        telegramBot.onUpdateReceived(update)
+
+        then: "a message will ask the user to use a command"
+        1 * sendMessageRequest.setText('Please use one of the commands, followed by a valid parameter\nEg: /pokemon pikachu' +
+                '\nEg: /type fire\nEg: /pokedex 1')
 
         and: "expect error since we are not sending the message when testing"
         thrown(NullPointerException)
@@ -151,6 +172,26 @@ class TelegramBotSpec extends Specification {
 
         then: "information about the pokemon is sent"
         1 * sendMessageRequest.setText('Type: \n  Strong Against: \n  Weak Against: \n')
+
+        and: "expect error since we are not sending the message when testing"
+        thrown(NullPointerException)
+
+    }
+
+    def "when update has a valid pokedex number command pokemon should be sent"(){
+
+        given: "an update request with a valid message"
+        update.hasMessage() >> true
+        update.getMessage() >> message
+        message.hasText() >> true
+        message.getText() >> "/pokedex 1"
+
+        when: "onUpdateReceived is called"
+        telegramBot.onUpdateReceived(update)
+
+        then: "information about the pokemon is sent"
+        1 * sendMessageRequest.setText('Number: 0\nPokemon: \nType: \nBuddy Distance: 0km\nBest Offence move set: ' +
+                '/\nBest Defensive move set: /')
 
         and: "expect error since we are not sending the message when testing"
         thrown(NullPointerException)
