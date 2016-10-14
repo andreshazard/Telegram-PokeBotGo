@@ -31,6 +31,11 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
+        /**
+         * This method is call whenever something is sent to the bot
+         * It will read the data and sent a response if it applies
+         * @pram Update object that hold the data sent
+         */
 
         if(update.hasMessage()){
             message = update.getMessage();
@@ -55,24 +60,35 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     private void setResponseMessage(String command) {
+        /**
+         * This method will set the response for the user depending on what he sent to the bot.
+         * It will log the request of the user the database only if the command is one of the commands
+         * @param command that the user sent to the bot
+         *
+         */
         if ("/start".equals(command)) {
+            dao.saveBotUsage(command);
             setStartRespond();
         }
         else if ("/pokemon".equals(command) || "/type".equals(command) || "/pokedex".equals(command)) {
+            dao.saveBotUsage(command);
             setDefaultRespond(); //user did not send the parameter
         }
         else if(command.length() >= 5 && "/type".equals(command.substring(0, 5)) &&
                 typeList.TypeListCheck(command.substring(6))) {
             setTypeRespond(command);
+            dao.saveBotUsage(command);
         }
 
         else if(command.length() >= 8 && "/pokemon".equals(command.substring(0, 8)) &&
                 pokemonList.pokemonListCheck(command.substring(9))) {
             setPokemonRespond(command);
+            dao.saveBotUsage(command);
         }
         else if(command.length() >=8 && "/pokedex".equals(command.substring(0, 8)) &&
                 StringTool.isNumber(command.substring(9)) && pokemonList.pokemonNumberCheck(Integer.parseInt(command.substring(9)))) {
             setPokemonNumberRespond(Integer.parseInt(command.substring(9)));
+            dao.saveBotUsage(command);
         }
         else {
             setDefaultRespond();

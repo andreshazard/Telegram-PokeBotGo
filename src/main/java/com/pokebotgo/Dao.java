@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Class that handles the calls to the data base
@@ -119,4 +121,14 @@ public class Dao {
 
     }
 
+    public void saveBotUsage(String command) {
+        String query = "INSERT INTO bot_usage (message) value (" + '"' + command + '"' + ")";
+        try {
+            this.jdbcTemplate.execute(query);
+        }
+        catch (NullPointerException e) {
+            Dao.LOGGER.log(Level.SEVERE, "There was an issue saving usage to the database");
+            e.printStackTrace();
+        }
+    }
 }
