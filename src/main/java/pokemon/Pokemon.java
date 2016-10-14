@@ -39,11 +39,25 @@ public class Pokemon {
     @NotNull
     private String best_defensive_charge_move_id;
 
+    @NotNull
+    private int base_attack;
+
+    @NotNull
+    private int base_defense;
+
+    @NotNull
+    private int stamina;
+
+    @NotNull
+    private int max_cp;
+
+
 
     //Temporary constructor, this should have a builder pattern
     public Pokemon(int pokemon_number, String pokemon_name, String type, int buddy_distance,
                    String best_offensive_quick_move_id, String best_offensive_charge_move_id,
-                   String best_defensive_quick_move_id, String best_defensive_charge_move_id) {
+                   String best_defensive_quick_move_id, String best_defensive_charge_move_id,
+                   int base_attack, int base_defense, int stamina, int max_cp) {
         this.pokemon_number = pokemon_number;
         this.pokemon_name = pokemon_name;
         this.type = type;
@@ -52,6 +66,10 @@ public class Pokemon {
         this.best_offensive_charge_move_id = best_offensive_charge_move_id;
         this.best_defensive_quick_move_id = best_defensive_quick_move_id;
         this.best_defensive_charge_move_id = best_defensive_charge_move_id;
+        this.base_attack = base_attack;
+        this.base_defense = base_defense;
+        this.stamina = stamina;
+        this.max_cp = max_cp;
     }
 
     public int getPokemon_number() {
@@ -84,5 +102,21 @@ public class Pokemon {
 
     public String getBest_defensive_charge_move_id() {
         return best_defensive_charge_move_id;
+    }
+
+    public int getBase_attack() {
+        return base_attack;
+    }
+
+    public int getBase_defense() {
+        return base_defense;
+    }
+
+    public int getStamina() {
+        return stamina;
+    }
+
+    public int getMax_cp() {
+        return max_cp;
     }
 }

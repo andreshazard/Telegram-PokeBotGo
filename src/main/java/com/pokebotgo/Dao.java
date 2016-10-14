@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Class that handles the calls to the data base
@@ -36,7 +34,11 @@ public class Dao {
                 "qa.quick_move_name, " +
                 "ca.charge_move_name, " +
                 "qd.quick_move_name, " +
-                "cd.charge_move_name " +
+                "cd.charge_move_name, " +
+                "p.base_attack, " +
+                "p.base_defense, " +
+                "p.stamina, " +
+                "p.max_cp " +
         "FROM pokemon AS p " +
         "INNER JOIN type AS t ON p.type_id=t.type_id " +
         "LEFT JOIN quick_move AS qa ON qa.quick_move_id=p.best_offensive_quick_move_id " +
@@ -56,7 +58,11 @@ public class Dao {
                 "qa.quick_move_name, " +
                 "ca.charge_move_name, " +
                 "qd.quick_move_name, " +
-                "cd.charge_move_name " +
+                "cd.charge_move_name, " +
+                "p.base_attack, " +
+                "p.base_defense, " +
+                "p.stamina, " +
+                "p.max_cp " +
                 "FROM pokemon AS p " +
                 "INNER JOIN type AS t ON p.type_id=t.type_id " +
                 "LEFT JOIN quick_move AS qa ON qa.quick_move_id=p.best_offensive_quick_move_id " +
@@ -72,7 +78,7 @@ public class Dao {
 
     private Pokemon createPokemonObject(String query) {
         try {
-            return this.jdbcTemplate.queryForObject(query, ((resultSet, i) -> {
+            return this.jdbcTemplate.queryForObject(query, (resultSet, i) -> {
                 return new Pokemon(
                         resultSet.getInt(1),
                         resultSet.getString(2),
@@ -81,8 +87,12 @@ public class Dao {
                         resultSet.getString(5),
                         resultSet.getString(6),
                         resultSet.getString(7),
-                        resultSet.getString(8));
-            }));
+                        resultSet.getString(8),
+                        resultSet.getInt(9),
+                        resultSet.getInt(10),
+                        resultSet.getInt(11),
+                        resultSet.getInt(12));
+            });
         } catch (NullPointerException e) {
             Dao.LOGGER.log(Level.SEVERE, "There was an issue getting the info from database");
             e.printStackTrace();

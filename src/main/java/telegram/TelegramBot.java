@@ -128,14 +128,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private void setPokemonRespond(String command) {
         Pokemon pokemon = dao.getPokemonWithName(command.substring(9));
-        String response = "Number: " + pokemon.getPokemon_number() + NEWLINE +
-                "Pokemon: " + pokemon.getPokemon_name() + NEWLINE +
-                "Type: " + pokemon.getType() + NEWLINE +
-                "Buddy Distance: " + pokemon.getBuddy_distance() + "km" + NEWLINE +
-                "Best Offence move set: " + pokemon.getBest_offensive_quick_move_id() + "/" +
-                pokemon.getBest_offensive_charge_move_id() + NEWLINE +
-                "Best Defensive move set: " + pokemon.getBest_defensive_quick_move_id() + "/" +
-                pokemon.getBest_defensive_charge_move_id();
+        String response = getPokemonStringMessage(pokemon);
 
         sendMessageRequest.setText(response);
 
@@ -143,16 +136,24 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private void setPokemonNumberRespond(int number) {
         Pokemon pokemon = dao.getPokemonWithNumber(number);
-        String response = "Number: " + pokemon.getPokemon_number() + NEWLINE +
+        String response = getPokemonStringMessage(pokemon);
+        sendMessageRequest.setText(response);
+
+    }
+
+    private String getPokemonStringMessage(Pokemon pokemon) {
+        return  "Number: " + pokemon.getPokemon_number() + NEWLINE +
                 "Pokemon: " + pokemon.getPokemon_name() + NEWLINE +
                 "Type: " + pokemon.getType() + NEWLINE +
                 "Buddy Distance: " + pokemon.getBuddy_distance() + "km" + NEWLINE +
+                "Base Attack: " + pokemon.getBase_attack() + NEWLINE +
+                "Base Defense: " + pokemon.getBase_defense() + NEWLINE +
+                "Stamina: " + pokemon.getStamina() + NEWLINE +
+                "Max CP: " + pokemon.getMax_cp() + NEWLINE +
                 "Best Offence move set: " + pokemon.getBest_offensive_quick_move_id() + "/" +
                 pokemon.getBest_offensive_charge_move_id() + NEWLINE +
                 "Best Defensive move set: " + pokemon.getBest_defensive_quick_move_id() + "/" +
                 pokemon.getBest_defensive_charge_move_id();
-
-        sendMessageRequest.setText(response);
 
     }
 

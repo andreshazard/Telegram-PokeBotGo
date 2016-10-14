@@ -5,6 +5,7 @@ import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
 import org.telegram.telegrambots.api.objects.Update
 import pokemon.Pokemon
+import spock.lang.Shared
 import spock.lang.Specification
 import telegram.TelegramBot
 import type.Type
@@ -25,6 +26,15 @@ class TelegramBotSpec extends Specification {
 
     @Collaborator
     Dao dao = Mock();
+
+    @Shared
+    Pokemon pokemonPikachu = new Pokemon(25, 'pikachu', 'electric', 1,
+                'Thunder Shock', 'Thunder', 'Quick Attack', 'Thunderbolt', 124, 108, 70, 888);
+
+    @Shared
+    String pokemonPikachuResponse = 'Number: 25\nPokemon: pikachu\nType: electric\nBuddy Distance: 1km' +
+                '\nBase Attack: 124\nBase Defense: 108\nStamina: 70\nMax CP: 888\nBest Offence move set: Thunder Shock/Thunder' +
+                '\nBest Defensive move set: Quick Attack/Thunderbolt'
 
     def "when update has no message nothing should be return to the user"() {
 
@@ -253,15 +263,13 @@ class TelegramBotSpec extends Specification {
         message.getText() >> "/pokemon pikachu"
 
         and: "the dao object returns the pokemon"
-        dao.getPokemonWithName('pikachu') >> new Pokemon(25, 'pikachu', 'electric', 1,
-                'Thunder Shock', 'Thunder', 'Quick Attack', 'Thunderbolt');
+        dao.getPokemonWithName('pikachu') >> pokemonPikachu;
 
         when: "onUpdateReceived is called and the dao object return the pokemon"
         telegramBot.onUpdateReceived(update)
 
         then: "information about the pokemon is sent"
-        1 * sendMessageRequest.setText('Number: 25\nPokemon: pikachu\nType: electric\nBuddy Distance: 1km\n' +
-                'Best Offence move set: Thunder Shock/Thunder\nBest Defensive move set: Quick Attack/Thunderbolt')
+        1 * sendMessageRequest.setText(pokemonPikachuResponse)
 
         and: "expect error since we are not sending the message when testing"
         thrown(NullPointerException)
@@ -277,8 +285,7 @@ class TelegramBotSpec extends Specification {
         message.getText() >> "/pokemon pikachu"
 
         and: "the dao object returns the pokemon"
-        dao.getPokemonWithName('pikachu') >> new Pokemon(25, 'pikachu', 'electric', 1,
-                'Thunder Shock', 'Thunder', 'Quick Attack', 'Thunderbolt');
+        dao.getPokemonWithName('pikachu') >> pokemonPikachu;
 
         when: "onUpdateReceived is called and the dao object return the pokemon"
         telegramBot.onUpdateReceived(update)
@@ -344,15 +351,13 @@ class TelegramBotSpec extends Specification {
         message.getText() >> "/pokedex 1"
 
         and: "the dao returns the pokemon"
-        dao.getPokemonWithNumber(1) >> new Pokemon(25, 'pikachu', 'electric', 1,
-                'Thunder Shock', 'Thunder', 'Quick Attack', 'Thunderbolt');
+        dao.getPokemonWithNumber(1) >> pokemonPikachu;
 
         when: "onUpdateReceived is called"
         telegramBot.onUpdateReceived(update)
 
         then: "information about the pokemon is sent"
-        1 * sendMessageRequest.setText('Number: 25\nPokemon: pikachu\nType: electric\nBuddy Distance: 1km\n' +
-                'Best Offence move set: Thunder Shock/Thunder\nBest Defensive move set: Quick Attack/Thunderbolt')
+        1 * sendMessageRequest.setText(pokemonPikachuResponse)
 
         and: "expect error since we are not sending the message when testing"
         thrown(NullPointerException)
@@ -367,8 +372,7 @@ class TelegramBotSpec extends Specification {
         message.getText() >> "/pokedex 1"
 
         and: "the dao returns the pokemon"
-        dao.getPokemonWithNumber(1) >> new Pokemon(25, 'pikachu', 'electric', 1,
-                'Thunder Shock', 'Thunder', 'Quick Attack', 'Thunderbolt');
+        dao.getPokemonWithNumber(1) >> pokemonPikachu;
 
         when: "onUpdateReceived is called"
         telegramBot.onUpdateReceived(update)
