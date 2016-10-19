@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 import pokemon.Pokemon;
+import pokemon.PokemonBuilder;
 import telegram.BotConfig;
 import type.Type;
 
@@ -77,21 +78,22 @@ public class Dao {
     }
 
     private Pokemon createPokemonObject(String query) {
+        PokemonBuilder pokemonBuilder = new PokemonBuilder();
         try {
             return this.jdbcTemplate.queryForObject(query, (resultSet, i) -> {
-                return new Pokemon(
-                        resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getInt(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getString(7),
-                        resultSet.getString(8),
-                        resultSet.getInt(9),
-                        resultSet.getInt(10),
-                        resultSet.getInt(11),
-                        resultSet.getInt(12));
+                        pokemonBuilder.Pokemon_number(resultSet.getInt(1));
+                        pokemonBuilder.Pokemon_name(resultSet.getString(2));
+                        pokemonBuilder.Type(resultSet.getString(3));
+                        pokemonBuilder.Buddy_distance(resultSet.getInt(4));
+                        pokemonBuilder.Best_offensive_quick_move_id(resultSet.getString(5));
+                        pokemonBuilder.Best_offensive_charge_move_id(resultSet.getString(6));
+                        pokemonBuilder.Best_defensive_quick_move_id(resultSet.getString(7));
+                        pokemonBuilder.Best_defensive_charge_move_id(resultSet.getString(8));
+                        pokemonBuilder.Base_attack(resultSet.getInt(9));
+                        pokemonBuilder.Base_defense(resultSet.getInt(10));
+                        pokemonBuilder.Stamina(resultSet.getInt(11));
+                        pokemonBuilder.Max_cp(resultSet.getInt(12));
+                        return pokemonBuilder.build();
             });
         } catch (NullPointerException e) {
             Dao.LOGGER.log(Level.SEVERE, "There was an issue getting the info from database");
