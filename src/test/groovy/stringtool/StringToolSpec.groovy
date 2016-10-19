@@ -1,4 +1,4 @@
-package StringTool
+package stringtool
 
 import spock.lang.Specification
 /**

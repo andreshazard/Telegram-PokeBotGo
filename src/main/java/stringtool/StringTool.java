@@ -1,4 +1,4 @@
-package StringTool;
+package stringtool;
 
 /**
  * Class to verify if String is number or not.
@@ -6,15 +6,18 @@ package StringTool;
  */
 public class StringTool {
 
-    public final static boolean isNumber(String str) {
+    // No public constructor
+    private StringTool() {}
+
+    public static final boolean isNumber(String str) {
         try
         {
             int number = Integer.parseInt(str);
+            return true;
         }
         catch(NumberFormatException nfe)
         {
             return false;
         }
-        return true;
     }
 }

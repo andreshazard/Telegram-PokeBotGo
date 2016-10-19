@@ -2,7 +2,7 @@ package telegram;
 
 import pokemon.PokemonList;
 import type.TypeList;
-import StringTool.StringTool;
+import stringtool.StringTool;
 
 /**
  * Class that handles checking if command sent by user is valid or not
