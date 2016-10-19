@@ -28,7 +28,7 @@ public class CommandChecker {
 
     public boolean isValidTypeCommand(String command) {
         return command.length() >= 5 && "/type".equals(command.substring(0, 5)) &&
-                typeList.TypeListCheck(command.substring(6));
+                typeList.typeListCheck(command.substring(6));
     }
 
     public boolean isCommandWithNoParameter(String command) {

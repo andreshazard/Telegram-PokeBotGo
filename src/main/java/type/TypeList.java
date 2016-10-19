@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class TypeList {
 
-    private final static List<String> TYPE_LIST = Arrays.asList(
+    private static final List<String> TYPE_LIST = Arrays.asList(
             "bug",
             "dark",
             "dragon",
@@ -29,7 +29,7 @@ public class TypeList {
             "water"
     );
 
-    public boolean TypeListCheck(String name) {
+    public boolean typeListCheck(String name) {
         return TYPE_LIST.contains(name);
     }
 }
