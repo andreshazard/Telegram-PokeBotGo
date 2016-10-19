@@ -13,22 +13,24 @@ import java.util.stream.Stream;
  * Class that holds the bot's information
  */
 public class BotConfig {
+
     public static final String BOT_USERNAME = "PokeBotGo";
     public static final String BOT_TOKEN = getBotTokenFromFile();
-    public final static Logger LOGGER = Logger.getLogger(BotConfig.class.getName());
+    public static final Logger LOGGER = Logger.getLogger(BotConfig.class.getName());
+
+    // No public constructor
+    private BotConfig() {}
 
 
     private static final  String getBotTokenFromFile() {
         String fileName = "bot_token.txt";
-        String toke;
         try (Stream<String> stream = Files.lines(Paths.get(fileName))){
             List<String> list;
             list = stream.collect(Collectors.toList());
             return list.get(0);
         }
         catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Make sure file PokeBotGo is present on root path");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Make sure file PokeBotGo is present on root path" + e);
         }
 
         return "error"; //this should not be reach
@@ -36,14 +38,13 @@ public class BotConfig {
 
     private static final  String getTestBotTokenFromFile() {
         String fileName = "test_bot_token.txt";
-        String toke;
         try (Stream<String> stream = Files.lines(Paths.get(fileName))){
             List<String> list;
             list = stream.collect(Collectors.toList());
             return list.get(0);
         }
         catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Make sure file test PokeBotGo is present on root path" + e);
         }
 
         return "error"; //this should not be reach
