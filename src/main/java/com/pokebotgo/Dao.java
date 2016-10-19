@@ -78,22 +78,22 @@ public class Dao {
     }
 
     private Pokemon createPokemonObject(String query) {
-        PokemonBuilder pokemonBuilder = new PokemonBuilder();
         try {
             return this.jdbcTemplate.queryForObject(query, (resultSet, i) -> {
-                        pokemonBuilder.Pokemon_number(resultSet.getInt(1));
-                        pokemonBuilder.Pokemon_name(resultSet.getString(2));
-                        pokemonBuilder.Type(resultSet.getString(3));
-                        pokemonBuilder.Buddy_distance(resultSet.getInt(4));
-                        pokemonBuilder.Best_offensive_quick_move_id(resultSet.getString(5));
-                        pokemonBuilder.Best_offensive_charge_move_id(resultSet.getString(6));
-                        pokemonBuilder.Best_defensive_quick_move_id(resultSet.getString(7));
-                        pokemonBuilder.Best_defensive_charge_move_id(resultSet.getString(8));
-                        pokemonBuilder.Base_attack(resultSet.getInt(9));
-                        pokemonBuilder.Base_defense(resultSet.getInt(10));
-                        pokemonBuilder.Stamina(resultSet.getInt(11));
-                        pokemonBuilder.Max_cp(resultSet.getInt(12));
-                        return pokemonBuilder.build();
+                return new PokemonBuilder()
+                        .Pokemon_number(resultSet.getInt(1))
+                        .Pokemon_name(resultSet.getString(2))
+                        .Type(resultSet.getString(3))
+                        .Buddy_distance(resultSet.getInt(4))
+                        .Best_offensive_quick_move_id(resultSet.getString(5))
+                        .Best_offensive_charge_move_id(resultSet.getString(6))
+                        .Best_defensive_quick_move_id(resultSet.getString(7))
+                        .Best_defensive_charge_move_id(resultSet.getString(8))
+                        .Base_attack(resultSet.getInt(9))
+                        .Base_defense(resultSet.getInt(10))
+                        .Stamina(resultSet.getInt(11))
+                        .Max_cp(resultSet.getInt(12))
+                        .build();
             });
         } catch (NullPointerException e) {
             Dao.LOGGER.log(Level.SEVERE, "There was an issue getting the info from database");
