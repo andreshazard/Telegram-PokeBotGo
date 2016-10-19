@@ -27,8 +27,7 @@ public class PokeBotGoApplication {
 		try {
 			telegramBotsApi.registerBot(new TelegramBot());
 		} catch (TelegramApiException e) {
-			BotConfig.LOGGER.log(Level.SEVERE, "Error starting the app");
-			e.printStackTrace();
+			BotConfig.LOGGER.log(Level.SEVERE, "Error starting the app" + e);
 		}
 	}
 

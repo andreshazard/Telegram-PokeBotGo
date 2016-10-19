@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 @Component
 public class Dao {
 
-    public final static Logger LOGGER = Logger.getLogger(BotConfig.class.getName());
+    public static final Logger LOGGER = Logger.getLogger(BotConfig.class.getName());
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -96,8 +96,7 @@ public class Dao {
                         .build();
             });
         } catch (NullPointerException e) {
-            Dao.LOGGER.log(Level.SEVERE, "There was an issue getting the info from database");
-            e.printStackTrace();
+            Dao.LOGGER.log(Level.SEVERE, "There was an issue getting the info from database" + e);
             return null;
         }
     }
@@ -122,12 +121,10 @@ public class Dao {
                 }
             }
 
-            Type type = new Type(name, strongAgainst, weekAgainst);
-            return type;
+            return new Type(name, strongAgainst, weekAgainst);
 
         } catch (NullPointerException e) {
-            Dao.LOGGER.log(Level.SEVERE, "There was an issue getting the info from database");
-            e.printStackTrace();
+            Dao.LOGGER.log(Level.SEVERE, "There was an issue getting the info from database" + e);
             return null;
         }
 
@@ -139,8 +136,7 @@ public class Dao {
             this.jdbcTemplate.execute(query);
         }
         catch (NullPointerException e) {
-            Dao.LOGGER.log(Level.SEVERE, "There was an issue saving usage to the database");
-            e.printStackTrace();
+            Dao.LOGGER.log(Level.SEVERE, "There was an issue saving usage to the database" + e);
         }
     }
 }
