@@ -1,6 +1,5 @@
 package telegram;
 
-import StringTool.StringTool;
 import com.pokebotgo.Dao;
 import com.pokebotgo.PokeBotGoApplication;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
@@ -9,9 +8,7 @@ import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import pokemon.Pokemon;
-import pokemon.PokemonList;
 import type.Type;
-import type.TypeList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,13 +18,12 @@ import java.util.logging.Logger;
  */
 public class TelegramBot extends TelegramLongPollingBot {
 
-    private final static Logger LOGGER = Logger.getLogger(BotConfig.class.getName());
-    private final static String NEWLINE = System.getProperty("line.separator");
+    private static final Logger LOGGER = Logger.getLogger(BotConfig.class.getName());
+    private static final String NEWLINE = System.getProperty("line.separator");
     private final SendMessage sendMessageRequest = new SendMessage();
-    private final PokemonList pokemonList = new PokemonList();
-    private final TypeList typeList = new TypeList();
     private Message message;
     private Dao dao = PokeBotGoApplication.dao;
+    private CommandChecker commandChecker = new CommandChecker();
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -50,8 +46,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                 try {
                     sendMessage(sendMessageRequest); //at the end, so some magic and send the message ;)
                 } catch (TelegramApiException e) {
-                    TelegramBot.LOGGER.log(Level.SEVERE, "There was an error sending the message");
-                    e.printStackTrace();
+                    TelegramBot.LOGGER.log(Level.SEVERE, "There was an error sending the message" + e);
 
                 }
             }
@@ -66,29 +61,26 @@ public class TelegramBot extends TelegramLongPollingBot {
          * @param command that the user sent to the bot
          *
          */
-        if ("/start".equals(command)) {
+        if (commandChecker.isValidStartCommand(command)) {
             dao.saveBotUsage(command);
             setStartRespond();
         }
-        else if ("/pokemon".equals(command) || "/type".equals(command) || "/pokedex".equals(command)) {
+        else if (commandChecker.isCommandWithNoParameter(command)) {
             dao.saveBotUsage(command);
             setDefaultRespond(); //user did not send the parameter
         }
-        else if(command.length() >= 5 && "/type".equals(command.substring(0, 5)) &&
-                typeList.TypeListCheck(command.substring(6))) {
-            setTypeRespond(command);
+        else if(commandChecker.isValidTypeCommand(command)) {
             dao.saveBotUsage(command);
+            setTypeRespond(command);
         }
 
-        else if(command.length() >= 8 && "/pokemon".equals(command.substring(0, 8)) &&
-                pokemonList.pokemonListCheck(command.substring(9))) {
+        else if(commandChecker.isValidPokemonCommand(command)) {
+            dao.saveBotUsage(command);
             setPokemonRespond(command);
-            dao.saveBotUsage(command);
         }
-        else if(command.length() >=8 && "/pokedex".equals(command.substring(0, 8)) &&
-                StringTool.isNumber(command.substring(9)) && pokemonList.pokemonNumberCheck(Integer.parseInt(command.substring(9)))) {
-            setPokemonNumberRespond(Integer.parseInt(command.substring(9)));
+        else if(commandChecker.isValidPokedexComand(command)) {
             dao.saveBotUsage(command);
+            setPokemonNumberRespond(Integer.parseInt(command.substring(9)));
         }
         else {
             setDefaultRespond();
