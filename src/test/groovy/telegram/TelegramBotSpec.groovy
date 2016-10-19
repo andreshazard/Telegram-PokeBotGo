@@ -5,6 +5,7 @@ import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
 import org.telegram.telegrambots.api.objects.Update
 import pokemon.Pokemon
+import pokemon.PokemonBuilder
 import spock.lang.Shared
 import spock.lang.Specification
 import telegram.TelegramBot
@@ -28,13 +29,25 @@ class TelegramBotSpec extends Specification {
     Dao dao = Mock();
 
     @Shared
-    Pokemon pokemonPikachu = new Pokemon(25, 'pikachu', 'electric', 1,
-                'Thunder Shock', 'Thunder', 'Quick Attack', 'Thunderbolt', 124, 108, 70, 888);
+    Pokemon pokemonPikachu = new PokemonBuilder()
+                    .Pokemon_number(25)
+    .Pokemon_name('pikachu')
+    .Type('electric')
+    .Buddy_distance(1)
+    .Best_offensive_quick_move_id('Thunder Shock')
+    .Best_offensive_charge_move_id('Thunder')
+    .Best_defensive_quick_move_id('Quick Attack')
+    .Best_defensive_charge_move_id('Thunderbolt')
+    .Base_attack(124)
+    .Base_defense(108)
+    .Stamina(70)
+    .Max_cp(888)
+    .build();
 
     @Shared
-    String pokemonPikachuResponse = 'Number: 25\nPokemon: pikachu\nType: electric\nBuddy Distance: 1km' +
-                '\nBase Attack: 124\nBase Defense: 108\nStamina: 70\nMax CP: 888\nBest Offence move set: Thunder Shock/Thunder' +
-                '\nBest Defensive move set: Quick Attack/Thunderbolt'
+    String pokemonPikachuResponse = 'Number: 25\nPokemon: pikachu\nType: electric\nBuddy Distance: 1km\nBase Attack: 124' +
+            '\nBase Defense: 0\nStamina: 70\nMax CP: 888\nBest Offence move set: Thunder Shock/Thunder' +
+            '\nBest Defensive move set: Quick Attack/Thunderbolt'
 
     def "when update has no message nothing should be return to the user"() {
 
