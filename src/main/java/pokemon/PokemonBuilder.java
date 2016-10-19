@@ -64,7 +64,11 @@ public class PokemonBuilder {
     }
 
     public PokemonBuilder Stamina(int stamina) {
-        this.stamina = stamina; return this; } public PokemonBuilder Base_defense(int base_defense) {
+        this.stamina = stamina;
+        return this;
+    }
+
+    public PokemonBuilder Base_defense(int base_defense) {
         this.base_defense = base_defense;
         return this;
     }

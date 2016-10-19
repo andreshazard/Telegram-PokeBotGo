@@ -63,28 +63,10 @@ public class Pokemon {
         best_defensive_quick_move_id = builder.getBest_defensive_quick_move_id();
         best_defensive_charge_move_id = builder.getBest_defensive_charge_move_id();
         base_attack = builder.getBase_attack();
+        base_defense = builder.getBase_defense();
         stamina = builder.getStamina();
         max_cp = builder.getMax_cp();
     }
-
-    //Temporary constructor, this should have a builder pattern
-//    public Pokemon(int pokemon_number, String pokemon_name, String type, int buddy_distance,
-//                   String best_offensive_quick_move_id, String best_offensive_charge_move_id,
-//                   String best_defensive_quick_move_id, String best_defensive_charge_move_id,
-//                   int base_attack, int base_defense, int stamina, int max_cp) {
-//        this.pokemon_number = pokemon_number;
-//        this.pokemon_name = pokemon_name;
-//        this.type = type;
-//        this.buddy_distance = buddy_distance;
-//        this.best_offensive_quick_move_id = best_offensive_quick_move_id;
-//        this.best_offensive_charge_move_id = best_offensive_charge_move_id;
-//        this.best_defensive_quick_move_id = best_defensive_quick_move_id;
-//        this.best_defensive_charge_move_id = best_defensive_charge_move_id;
-//        this.base_attack = base_attack;
-//        this.base_defense = base_defense;
-//        this.stamina = stamina;
-//        this.max_cp = max_cp;
-//    }
 
     public int getPokemon_number() {
         return pokemon_number;

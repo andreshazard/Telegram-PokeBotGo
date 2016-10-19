@@ -46,7 +46,7 @@ class TelegramBotSpec extends Specification {
 
     @Shared
     String pokemonPikachuResponse = 'Number: 25\nPokemon: pikachu\nType: electric\nBuddy Distance: 1km\nBase Attack: 124' +
-            '\nBase Defense: 0\nStamina: 70\nMax CP: 888\nBest Offence move set: Thunder Shock/Thunder' +
+            '\nBase Defense: 108\nStamina: 70\nMax CP: 888\nBest Offence move set: Thunder Shock/Thunder' +
             '\nBest Defensive move set: Quick Attack/Thunderbolt'
 
     def "when update has no message nothing should be return to the user"() {
