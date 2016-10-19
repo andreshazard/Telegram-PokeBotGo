@@ -81,18 +81,18 @@ public class Dao {
         try {
             return this.jdbcTemplate.queryForObject(query, (resultSet, i) -> {
                 return new PokemonBuilder()
-                        .Pokemon_number(resultSet.getInt(1))
-                        .Pokemon_name(resultSet.getString(2))
-                        .Type(resultSet.getString(3))
-                        .Buddy_distance(resultSet.getInt(4))
-                        .Best_offensive_quick_move_id(resultSet.getString(5))
-                        .Best_offensive_charge_move_id(resultSet.getString(6))
-                        .Best_defensive_quick_move_id(resultSet.getString(7))
-                        .Best_defensive_charge_move_id(resultSet.getString(8))
-                        .Base_attack(resultSet.getInt(9))
-                        .Base_defense(resultSet.getInt(10))
-                        .Stamina(resultSet.getInt(11))
-                        .Max_cp(resultSet.getInt(12))
+                        .pokemon_number(resultSet.getInt(1))
+                        .pokemon_name(resultSet.getString(2))
+                        .type(resultSet.getString(3))
+                        .buddy_distance(resultSet.getInt(4))
+                        .best_offensive_quick_move_id(resultSet.getString(5))
+                        .best_offensive_charge_move_id(resultSet.getString(6))
+                        .best_defensive_quick_move_id(resultSet.getString(7))
+                        .best_defensive_charge_move_id(resultSet.getString(8))
+                        .base_attack(resultSet.getInt(9))
+                        .base_defense(resultSet.getInt(10))
+                        .stamina(resultSet.getInt(11))
+                        .max_cp(resultSet.getInt(12))
                         .build();
             });
         } catch (NullPointerException e) {

@@ -58,62 +58,62 @@ public class PokemonBuilder {
         return new Pokemon(this);
     }
 
-    public PokemonBuilder Max_cp(int max_cp) {
+    public PokemonBuilder max_cp(int max_cp) {
         this.max_cp = max_cp;
         return this;
     }
 
-    public PokemonBuilder Stamina(int stamina) {
+    public PokemonBuilder stamina(int stamina) {
         this.stamina = stamina;
         return this;
     }
 
-    public PokemonBuilder Base_defense(int base_defense) {
+    public PokemonBuilder base_defense(int base_defense) {
         this.base_defense = base_defense;
         return this;
     }
 
-    public PokemonBuilder Base_attack(int base_attack) {
+    public PokemonBuilder base_attack(int base_attack) {
         this.base_attack = base_attack;
         return this;
     }
 
-    public PokemonBuilder Best_defensive_charge_move_id(String best_defensive_charge_move_id) {
+    public PokemonBuilder best_defensive_charge_move_id(String best_defensive_charge_move_id) {
         this.best_defensive_charge_move_id = best_defensive_charge_move_id;
         return this;
     }
 
-    public PokemonBuilder Best_defensive_quick_move_id(String best_defensive_quick_move_id) {
+    public PokemonBuilder best_defensive_quick_move_id(String best_defensive_quick_move_id) {
         this.best_defensive_quick_move_id = best_defensive_quick_move_id;
         return this;
     }
 
-    public PokemonBuilder Best_offensive_charge_move_id(String best_offensive_charge_move_id) {
+    public PokemonBuilder best_offensive_charge_move_id(String best_offensive_charge_move_id) {
         this.best_offensive_charge_move_id = best_offensive_charge_move_id;
         return this;
     }
 
-    public PokemonBuilder Best_offensive_quick_move_id(String best_offensive_quick_move_id) {
+    public PokemonBuilder best_offensive_quick_move_id(String best_offensive_quick_move_id) {
         this.best_offensive_quick_move_id = best_offensive_quick_move_id;
         return this;
     }
 
-    public PokemonBuilder Buddy_distance(int buddy_distance) {
+    public PokemonBuilder buddy_distance(int buddy_distance) {
         this.buddy_distance = buddy_distance;
         return this;
     }
 
-    public PokemonBuilder Type(String type) {
+    public PokemonBuilder type(String type) {
         this.type = type;
         return this;
     }
 
-    public PokemonBuilder Pokemon_name(String pokemon_name) {
+    public PokemonBuilder pokemon_name(String pokemon_name) {
         this.pokemon_name = pokemon_name;
         return this;
     }
 
-    public PokemonBuilder Pokemon_number(int pokemon_number) {
+    public PokemonBuilder pokemon_number(int pokemon_number) {
         this.pokemon_number = pokemon_number;
         return this;
     }

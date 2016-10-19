@@ -30,18 +30,18 @@ class TelegramBotSpec extends Specification {
 
     @Shared
     Pokemon pokemonPikachu = new PokemonBuilder()
-                    .Pokemon_number(25)
-    .Pokemon_name('pikachu')
-    .Type('electric')
-    .Buddy_distance(1)
-    .Best_offensive_quick_move_id('Thunder Shock')
-    .Best_offensive_charge_move_id('Thunder')
-    .Best_defensive_quick_move_id('Quick Attack')
-    .Best_defensive_charge_move_id('Thunderbolt')
-    .Base_attack(124)
-    .Base_defense(108)
-    .Stamina(70)
-    .Max_cp(888)
+                    .pokemon_number(25)
+    .pokemon_name('pikachu')
+    .type('electric')
+    .buddy_distance(1)
+    .best_offensive_quick_move_id('Thunder Shock')
+    .best_offensive_charge_move_id('Thunder')
+    .best_defensive_quick_move_id('Quick Attack')
+    .best_defensive_charge_move_id('Thunderbolt')
+    .base_attack(124)
+    .base_defense(108)
+    .stamina(70)
+    .max_cp(888)
     .build();
 
     @Shared
