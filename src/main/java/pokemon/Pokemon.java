@@ -54,18 +54,18 @@ public class Pokemon {
 
 
     public Pokemon(PokemonBuilder builder) {
-        pokemon_number = builder.getPokemon_number();
-        pokemon_name = builder.getPokemon_name();
+        pokemon_number = builder.getPokemonNumber();
+        pokemon_name = builder.getPokemonName();
         type = builder.getType();
-        buddy_distance = builder.getBuddy_distance();
-        best_offensive_quick_move_id = builder.getBest_offensive_quick_move_id();
-        best_offensive_charge_move_id = builder.getBest_offensive_charge_move_id();
-        best_defensive_quick_move_id = builder.getBest_defensive_quick_move_id();
-        best_defensive_charge_move_id = builder.getBest_defensive_charge_move_id();
-        base_attack = builder.getBase_attack();
-        base_defense = builder.getBase_defense();
+        buddy_distance = builder.getBuddyDistance();
+        best_offensive_quick_move_id = builder.getBestOffensiveQuickMoveId();
+        best_offensive_charge_move_id = builder.getBestOffensiveChargeMoveId();
+        best_defensive_quick_move_id = builder.getBestDefensiveQuickMoveId();
+        best_defensive_charge_move_id = builder.getBestDefensiveChargeMoveId();
+        base_attack = builder.getBaseAttack();
+        base_defense = builder.getBaseDefense();
         stamina = builder.getStamina();
-        max_cp = builder.getMax_cp();
+        max_cp = builder.getMaxCp();
     }
 
     public int getPokemon_number() {

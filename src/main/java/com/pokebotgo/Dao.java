@@ -81,18 +81,18 @@ public class Dao {
         try {
             return this.jdbcTemplate.queryForObject(query, (resultSet, i) -> {
                 return new PokemonBuilder()
-                        .pokemon_number(resultSet.getInt(1))
-                        .pokemon_name(resultSet.getString(2))
+                        .pokemonNumber(resultSet.getInt(1))
+                        .pokemonName(resultSet.getString(2))
                         .type(resultSet.getString(3))
-                        .buddy_distance(resultSet.getInt(4))
-                        .best_offensive_quick_move_id(resultSet.getString(5))
-                        .best_offensive_charge_move_id(resultSet.getString(6))
-                        .best_defensive_quick_move_id(resultSet.getString(7))
-                        .best_defensive_charge_move_id(resultSet.getString(8))
-                        .base_attack(resultSet.getInt(9))
-                        .base_defense(resultSet.getInt(10))
+                        .buddyDistance(resultSet.getInt(4))
+                        .bestOffensiveQuickMoveId(resultSet.getString(5))
+                        .bestOffensiveChargeMoveId(resultSet.getString(6))
+                        .bestDefensiveQuickMoveId(resultSet.getString(7))
+                        .bestDefensiveChargeMoveId(resultSet.getString(8))
+                        .baseAttack(resultSet.getInt(9))
+                        .baseDefense(resultSet.getInt(10))
                         .stamina(resultSet.getInt(11))
-                        .max_cp(resultSet.getInt(12))
+                        .maxCp(resultSet.getInt(12))
                         .build();
             });
         } catch (NullPointerException e) {

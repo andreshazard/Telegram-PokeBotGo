@@ -5,61 +5,61 @@ package pokemon;
  */
 public class PokemonBuilder {
 
-    private int pokemon_number;
-    private String pokemon_name;
+    private int pokemonNumber;
+    private String pokemonName;
     private String type;
-    private int buddy_distance;
-    private String best_offensive_quick_move_id;
-    private String best_offensive_charge_move_id;
-    private String best_defensive_quick_move_id;
-    private String best_defensive_charge_move_id;
-    private int base_attack;
-    private int base_defense;
+    private int buddyDistance;
+    private String bestOffensiveQuickMoveId;
+    private String bestOffensiveChargeMoveId;
+    private String bestDefensiveQuickMoveId;
+    private String bestDefensiveChargeMoveId;
+    private int baseAttack;
+    private int baseDefense;
     private int stamina;
-    private int max_cp;
+    private int maxCp;
 
     public Pokemon build() {
-        if (pokemon_number < 0 || pokemon_number > 151) {
+        if (pokemonNumber < 0 || pokemonNumber > 151) {
             throw new IllegalStateException("Not valid pokemon number");
         }
-        if (pokemon_name == null) {
-            throw new IllegalStateException("No pokemon_name");
+        if (pokemonName == null) {
+            throw new IllegalStateException("No pokemonName");
         }
         if (type == null) {
             throw new IllegalStateException("No type name");
         }
-        if (buddy_distance != 1 && buddy_distance != 3 && buddy_distance !=5) {
+        if (buddyDistance != 1 && buddyDistance != 3 && buddyDistance !=5) {
             throw new IllegalStateException("Not valid buddy distance");
         }
-        if (best_offensive_quick_move_id == null) {
+        if (bestOffensiveQuickMoveId == null) {
             throw new IllegalStateException("No best offensive quick move");
         }
-        if (best_offensive_charge_move_id == null) {
+        if (bestOffensiveChargeMoveId == null) {
             throw new IllegalStateException("No best offensive charge move");
         }
-        if (best_defensive_quick_move_id == null) {
+        if (bestDefensiveQuickMoveId == null) {
             throw new IllegalStateException("No best defensive quick move");
         }
-        if (best_defensive_charge_move_id == null) {
+        if (bestDefensiveChargeMoveId == null) {
             throw new IllegalStateException("No best defensive charge move");
         }
-        if (base_attack < 0) {
+        if (baseAttack < 0) {
             throw new IllegalStateException("Not valid base attack");
         }
-        if (base_defense < 0) {
+        if (baseDefense < 0) {
             throw new IllegalStateException("Not valid base defense");
         }
         if (stamina < 0) {
             throw new IllegalStateException("Not valid stamina");
         }
-        if (max_cp < 0) {
-            throw new IllegalStateException("Not valid max_cp");
+        if (maxCp < 0) {
+            throw new IllegalStateException("Not valid maxCp");
         }
         return new Pokemon(this);
     }
 
-    public PokemonBuilder max_cp(int max_cp) {
-        this.max_cp = max_cp;
+    public PokemonBuilder maxCp(int maxCp) {
+        this.maxCp = maxCp;
         return this;
     }
 
@@ -68,38 +68,38 @@ public class PokemonBuilder {
         return this;
     }
 
-    public PokemonBuilder base_defense(int base_defense) {
-        this.base_defense = base_defense;
+    public PokemonBuilder baseDefense(int baseDefense) {
+        this.baseDefense = baseDefense;
         return this;
     }
 
-    public PokemonBuilder base_attack(int base_attack) {
-        this.base_attack = base_attack;
+    public PokemonBuilder baseAttack(int baseAttack) {
+        this.baseAttack = baseAttack;
         return this;
     }
 
-    public PokemonBuilder best_defensive_charge_move_id(String best_defensive_charge_move_id) {
-        this.best_defensive_charge_move_id = best_defensive_charge_move_id;
+    public PokemonBuilder bestDefensiveChargeMoveId(String bestDefensiveChargeMoveId) {
+        this.bestDefensiveChargeMoveId = bestDefensiveChargeMoveId;
         return this;
     }
 
-    public PokemonBuilder best_defensive_quick_move_id(String best_defensive_quick_move_id) {
-        this.best_defensive_quick_move_id = best_defensive_quick_move_id;
+    public PokemonBuilder bestDefensiveQuickMoveId(String bestDefensiveQuickMoveId) {
+        this.bestDefensiveQuickMoveId = bestDefensiveQuickMoveId;
         return this;
     }
 
-    public PokemonBuilder best_offensive_charge_move_id(String best_offensive_charge_move_id) {
-        this.best_offensive_charge_move_id = best_offensive_charge_move_id;
+    public PokemonBuilder bestOffensiveChargeMoveId(String bestOffensiveChargeMoveId) {
+        this.bestOffensiveChargeMoveId = bestOffensiveChargeMoveId;
         return this;
     }
 
-    public PokemonBuilder best_offensive_quick_move_id(String best_offensive_quick_move_id) {
-        this.best_offensive_quick_move_id = best_offensive_quick_move_id;
+    public PokemonBuilder bestOffensiveQuickMoveId(String bestOffensiveQuickMoveId) {
+        this.bestOffensiveQuickMoveId = bestOffensiveQuickMoveId;
         return this;
     }
 
-    public PokemonBuilder buddy_distance(int buddy_distance) {
-        this.buddy_distance = buddy_distance;
+    public PokemonBuilder buddyDistance(int buddyDistance) {
+        this.buddyDistance = buddyDistance;
         return this;
     }
 
@@ -108,61 +108,61 @@ public class PokemonBuilder {
         return this;
     }
 
-    public PokemonBuilder pokemon_name(String pokemon_name) {
-        this.pokemon_name = pokemon_name;
+    public PokemonBuilder pokemonName(String pokemonName) {
+        this.pokemonName = pokemonName;
         return this;
     }
 
-    public PokemonBuilder pokemon_number(int pokemon_number) {
-        this.pokemon_number = pokemon_number;
+    public PokemonBuilder pokemonNumber(int pokemonNumber) {
+        this.pokemonNumber = pokemonNumber;
         return this;
     }
 
-    public int getPokemon_number() {
-        return pokemon_number;
+    public int getPokemonNumber() {
+        return pokemonNumber;
     }
 
-    public String getPokemon_name() {
-        return pokemon_name;
+    public String getPokemonName() {
+        return pokemonName;
     }
 
     public String getType() {
         return type;
     }
 
-    public int getBuddy_distance() {
-        return buddy_distance;
+    public int getBuddyDistance() {
+        return buddyDistance;
     }
 
-    public String getBest_offensive_quick_move_id() {
-        return best_offensive_quick_move_id;
+    public String getBestOffensiveQuickMoveId() {
+        return bestOffensiveQuickMoveId;
     }
 
-    public String getBest_offensive_charge_move_id() {
-        return best_offensive_charge_move_id;
+    public String getBestOffensiveChargeMoveId() {
+        return bestOffensiveChargeMoveId;
     }
 
-    public String getBest_defensive_quick_move_id() {
-        return best_defensive_quick_move_id;
+    public String getBestDefensiveQuickMoveId() {
+        return bestDefensiveQuickMoveId;
     }
 
-    public String getBest_defensive_charge_move_id() {
-        return best_defensive_charge_move_id;
+    public String getBestDefensiveChargeMoveId() {
+        return bestDefensiveChargeMoveId;
     }
 
-    public int getBase_attack() {
-        return base_attack;
+    public int getBaseAttack() {
+        return baseAttack;
     }
 
-    public int getBase_defense() {
-        return base_defense;
+    public int getBaseDefense() {
+        return baseDefense;
     }
 
     public int getStamina() {
         return stamina;
     }
 
-    public int getMax_cp() {
-        return max_cp;
+    public int getMaxCp() {
+        return maxCp;
     }
 }
