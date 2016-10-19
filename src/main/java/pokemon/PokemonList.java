@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class PokemonList {
 
-    private final static List<String> POKEMON_LIST = Arrays.asList(
+    private static final List<String> POKEMON_LIST = Arrays.asList(
 		"bulbasaur",
 		"ivysaur",
 		"venusaur",
@@ -170,7 +170,7 @@ public class PokemonList {
 	public boolean pokemonNumberCheck(int number) {
         final int lowLimit = 0;
         final int maxLimit = 152;
-        return (number > lowLimit && number < maxLimit);
+        return number > lowLimit && number < maxLimit;
     }
 
 }
